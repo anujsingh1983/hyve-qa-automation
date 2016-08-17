@@ -36,15 +36,15 @@ public class HomeTest {
 	public void testLogin() {
 
 		// driver.get(hyvelogin);
-		driver.findElement(By.xpath("//div[3]/div[1]/div/div/div/div[3]/div/div/div[1]/a[2]")).click();
+		driver.findElement(By.xpath("//div[2]/div[1]/div/div/div/div/div[3]/div/div/div[1]/a[2]")).click();
 		driver.findElement(By.id("UserEmail")).clear();
-		driver.findElement(By.id("UserEmail")).sendKeys("puneet@hyve.buzz");
+		driver.findElement(By.id("UserEmail")).sendKeys("anuj.singh@hyve.buzz");
 		driver.findElement(By.id("UserPassword")).clear();
-		driver.findElement(By.id("UserPassword")).sendKeys("123123");
-		driver.findElement(By.xpath("//div[3]/div[2]/div/div/div/div[2]/div/div/form/div[3]/button")).submit();
+		driver.findElement(By.id("UserPassword")).sendKeys("1234567");
+		driver.findElement(By.xpath("//div[2]/div[2]/div/div/div/div/div[2]/div/div/form/div[3]/button")).submit();
 
-		String expected = "Hi, Puneet Thakkar";
-		String actualtext = driver.findElement(By.xpath("//div[3]/div[2]/div/div[1]/div/div")).getText();
+		String expected = "Anuj";
+		String actualtext = driver.findElement(By.className("username_name")).getText();
 		// Thread.sleep(3000);
 		Assert.assertEquals(actualtext, expected);
 
