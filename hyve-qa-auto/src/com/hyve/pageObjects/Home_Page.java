@@ -12,7 +12,8 @@ public class Home_Page {
 	 
 	 public static WebElement lnk_Login(WebDriver driver){
 	 
-	    element = driver.findElement(By.xpath("//div[3]/div[1]/div/div/div/div[3]/div/div/div[1]/a[2]"));
+	    element = driver.findElement(By.className("logout-header"));
+	    //element = driver.findElement(By.xpath("//div[2]/div[1]/div/div/div/div/div[3]/div/div/div[1]/a[2]"));
 	 
 	    return element;
 	 
@@ -20,7 +21,8 @@ public class Home_Page {
 	 
 	 public static WebElement lnk_LogOut(WebDriver driver){
 	 
-	    element = driver.findElement(By.xpath("//div[3]/div[1]/div/div/div/div[3]/div/div/div[1]/a[2]"));
+	  element = driver.findElement(By.className("logout-header"));
+	  //element = driver.findElement(By.xpath("//div[2]/div[1]/div/div/div/div/div[3]/div/div/div[1]/a[2]"));
 	 
 	 return element;
 	 

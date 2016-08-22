@@ -28,15 +28,15 @@ public class PageObjectModel {
 	 
 	     Login_Page.txtbx_UserName(driver).sendKeys("anuj.singh@hyve.buzz");
 	 
-	     Login_Page.txtbx_Password(driver).sendKeys("123456");
+	     Login_Page.txtbx_Password(driver).sendKeys("1234567");
 	 
-	     Login_Page.btn_LogIn(driver).click();
+	     Login_Page.btn_LogIn(driver).submit();
 	 
 	     System.out.println(" Login Successfully, now it is the time to Log Off buddy.");
 	 
-	     Home_Page.lnk_LogOut(driver).click(); 
+	     //Home_Page.lnk_LogOut(driver).click(); 
 	 
-	     driver.quit();
+	     //driver.quit();
 	 
 	     }
 

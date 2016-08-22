@@ -2,11 +2,13 @@ package com.hyve.automationFramework;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.hyve.pageObjects.*;
+import com.hyve.pageObjects.Home_Page;
 
 import com.hyve.utility.Constant;
 
@@ -31,12 +33,16 @@ public class automationTC {
     driver.get(Constant.URL);
 
     SignIn_Action.Execute(driver);
-
+    
+    driver.findElement(By.className("logout-header")).click();
+        
     System.out.println("Login Successfully, now it is the time to Log Off buddy.");
+    
+    //driver.findElement(By.className("logout-header")).click();
 
-    Home_Page.lnk_LogOut(driver).click(); 
-
-    driver.quit();
+    //Home_Page.lnk_LogOut(driver).click();
+       
+    //driver.quit();
 
     //This is to send the PASS value to the Excel sheet in the result column.
 

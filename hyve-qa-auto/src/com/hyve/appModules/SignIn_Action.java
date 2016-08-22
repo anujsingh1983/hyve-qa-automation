@@ -1,5 +1,7 @@
 package com.hyve.appModules;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 
 import com.hyve.pageObjects.Home_Page;
@@ -23,8 +25,10 @@ public class SignIn_Action {
 		Login_Page.txtbx_UserName(driver).sendKeys(sUserName);
 
 		Login_Page.txtbx_Password(driver).sendKeys(sPassword);
+		
+		Thread.sleep(3000);
 
-		Login_Page.btn_LogIn(driver).click();
+		Login_Page.btn_LogIn(driver).submit();
 
     }
 
