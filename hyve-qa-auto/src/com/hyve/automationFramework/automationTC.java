@@ -27,20 +27,20 @@ public class automationTC {
     ExcelUtils.setExcelFile(Constant.Path_TestData + Constant.File_TestData,"Sheet1");
 
     driver = new FirefoxDriver();
+    
+    driver.manage().window().maximize();
 
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     driver.get(Constant.URL);
 
     SignIn_Action.Execute(driver);
-    
-    driver.findElement(By.className("logout-header")).click();
         
     System.out.println("Login Successfully, now it is the time to Log Off buddy.");
     
     //driver.findElement(By.className("logout-header")).click();
 
-    //Home_Page.lnk_LogOut(driver).click();
+    Home_Page.lnk_LogOut(driver).click();
        
     //driver.quit();
 

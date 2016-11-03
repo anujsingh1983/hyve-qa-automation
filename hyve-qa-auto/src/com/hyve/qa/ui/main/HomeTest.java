@@ -57,8 +57,22 @@ public class HomeTest {
 		Assert.assertEquals(actualtext, expected);
 
 	}
-
+	
 	@Test(priority = 3)
+	public void testCart() throws InterruptedException{
+		driver.findElement(By.xpath("//div[2]/div[1]/div/div/div[1]/div/div[2]/div/div/ul/li[1]/a")).click();
+		driver.findElement(By.xpath("//div[2]/div[1]/div/div/div[2]/div[1]/ul/li[11]/a")).click();
+		String subtotal=driver.findElement(By.xpath("//div[2]/div[2]/div/div/div/div/div[1]/div/div/form/table/tbody/tr/td[4]/div")).getText();
+		System.out.println("subtotal = "+ subtotal);
+		String saleprice=driver.findElement(By.xpath("//div[2]/div[2]/div/div/div/div/div[1]/div/div/form/table/tbody/tr/td[3]/div")).getText();
+		System.out.println("Sale Price = "+ saleprice);
+		String quantity=driver.findElement(By.xpath("//*[contains(@name,'qty')]")).getAttribute("value");
+		System.out.println("Quantity = "+ quantity);
+		//int expectedsubtotal=(saleprice*quantity);
+		Thread.sleep(3000);
+	}
+
+	/*@Test(priority = 3)
 
 	public void Hyve_Care_Report_a_Bug() throws AWTException, InterruptedException {
 		driver.get(hyvecare);
@@ -96,7 +110,7 @@ public class HomeTest {
 		//Thread.sleep(3000);
 		driver.findElement(By.xpath("//div[2]/div[3]/div/div/div[2]/div/div/div/div/form/div[2]/div[11]/button")).submit();
 
-	}
+	}*/
 
 	@AfterTest
 	public void tearDown() throws Exception {
