@@ -5,6 +5,9 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -59,16 +62,29 @@ public class HomeTest {
 	}
 	
 	@Test(priority = 3)
-	public void testCart() throws InterruptedException{
+	public void testCart() throws InterruptedException, ParseException{
 		driver.findElement(By.xpath("//div[2]/div[1]/div/div/div[1]/div/div[2]/div/div/ul/li[1]/a")).click();
 		driver.findElement(By.xpath("//div[2]/div[1]/div/div/div[2]/div[1]/ul/li[11]/a")).click();
+		
 		String subtotal=driver.findElement(By.xpath("//div[2]/div[2]/div/div/div/div/div[1]/div/div/form/table/tbody/tr/td[4]/div")).getText();
 		System.out.println("subtotal = "+ subtotal);
+		
 		String saleprice=driver.findElement(By.xpath("//div[2]/div[2]/div/div/div/div/div[1]/div/div/form/table/tbody/tr/td[3]/div")).getText();
 		System.out.println("Sale Price = "+ saleprice);
+		
 		String quantity=driver.findElement(By.xpath("//*[contains(@name,'qty')]")).getAttribute("value");
 		System.out.println("Quantity = "+ quantity);
-		//int expectedsubtotal=(saleprice*quantity);
+		
+	
+	double isubtotal= Double.parseDouble(subtotal.replaceAll("[^0-9\\.]+", ""));
+	System.out.println("isubtotal is "+isubtotal);
+	double isaleprice= Double.parseDouble(saleprice.replaceAll("[^0-9\\.]+", ""));
+	System.out.println("isaleprice is "+isaleprice);
+		int iquantity=Integer.parseInt(quantity);
+		double expectedsubtotal=(isaleprice*iquantity);
+		System.out.println(expectedsubtotal);
+		Assert.assertEquals(isubtotal, expectedsubtotal);
+				
 		Thread.sleep(3000);
 	}
 
