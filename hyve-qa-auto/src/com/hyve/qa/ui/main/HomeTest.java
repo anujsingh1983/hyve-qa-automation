@@ -9,40 +9,55 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class HomeTest {
+import com.hyve.utility.Utility;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
+
+public class HomeTest {
+	
+	ExtentReports report;
+	ExtentTest logger;
 	public String hyvecare = "https://www.hyve.buzz/hyve-care-products";
 	public String hyvehome = "https://www.hyve.buzz/";
 	public String hyvelogin = "https://www.hyve.buzz/login";
 	public WebDriver driver = new FirefoxDriver();
 
-	@BeforeTest
+	/*@BeforeTest
 	public void setup() throws Exception {
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		driver.get(hyvehome);
-	}
+		
+	}*/
 
 	@Test(priority = 1)
 	public void testHomePageTitle() {
-		String expectedTital = "Hyve - Android Smartphones";
+		report = new ExtentReports("F:\\Automation\\git-codebase\\hyve-qa-automation\\hyve-qa-auto\\Report.html");
+		logger = report.startTest("testHomePageTitle");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		logger.log(LogStatus.INFO," Browser Started ");
+		driver.get(hyvehome);
+		logger.log(LogStatus.INFO," Browser up and Running ");
+		String expectedTital = "Hyve - Android Smartphonesss";
 		String actualTital = driver.getTitle();
 		Assert.assertEquals(actualTital, expectedTital);
+		logger.log(LogStatus.PASS," Title Verified ");
 
 	}
 
-	@Test(priority = 2)
+/*	@Test(priority = 2)
 	public void testLogin() {
 
 		// driver.get(hyvelogin);
@@ -52,7 +67,8 @@ public class HomeTest {
 		driver.findElement(By.id("UserEmail")).sendKeys("anuj.singh@hyve.buzz");
 		driver.findElement(By.id("UserPassword")).clear();
 		driver.findElement(By.id("UserPassword")).sendKeys("1234567");
-		driver.findElement(By.xpath("//div[2]/div[2]/div/div/div/div/div[2]/div/div/form/div[3]/button")).submit();
+		driver.findElement(By.className("login-btn waves-effect waves-cyan btn-yellow btn-large")).submit();
+		//driver.findElement(By.xpath("//div[2]/div[2]/div/div/div/div/div[2]/div/div/form/div[3]/button")).submit();
 		String expected = "Anuj";
 		String actualtext = driver.findElement(By.className("username_name")).getText();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -77,16 +93,17 @@ public class HomeTest {
 		
 	
 	double isubtotal= Double.parseDouble(subtotal.replaceAll("[^0-9\\.]+", ""));
-	System.out.println("isubtotal is "+isubtotal);
+	//System.out.println("isubtotal is "+isubtotal);
 	double isaleprice= Double.parseDouble(saleprice.replaceAll("[^0-9\\.]+", ""));
-	System.out.println("isaleprice is "+isaleprice);
+	//System.out.println("isaleprice is "+isaleprice);
 		int iquantity=Integer.parseInt(quantity);
 		double expectedsubtotal=(isaleprice*iquantity);
-		System.out.println(expectedsubtotal);
+		System.out.println("Expected Subtotal is "+expectedsubtotal);
 		Assert.assertEquals(isubtotal, expectedsubtotal);
+		System.out.println("Great.. Subtotal is correct");
 				
 		Thread.sleep(3000);
-	}
+	}*/
 
 	/*@Test(priority = 3)
 
@@ -128,9 +145,19 @@ public class HomeTest {
 
 	}*/
 
-	@AfterTest
-	public void tearDown() throws Exception {
-		driver.quit();
+	@AfterMethod
+	public void tearDown(ITestResult result)
+	{
+		if(result.getStatus()==ITestResult.FAILURE)
+		{
+			String screenshot_path= Utility.captureScreenshot(driver, result.getName());
+			String image=logger.addScreenCapture(screenshot_path);
+			logger.log(LogStatus.FAIL," Title Verification ", image);
+		}
+		report.endTest(logger);
+		report.flush();
+		driver.get("F:\\Automation\\git-codebase\\hyve-qa-automation\\hyve-qa-auto\\Report.html");
+		//driver.quit();
 	}
 
 }
