@@ -9,8 +9,13 @@ import com.hyve.pageObjects.Home_Page;
 import com.hyve.pageObjects.Login_Page;
 
 import com.hyve.utility.ExcelUtils;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class SignIn_Action {
+	
+	
 	
 	public static void Execute(WebDriver driver) throws Exception{
 		 
@@ -21,7 +26,7 @@ public class SignIn_Action {
 		String sPassword = ExcelUtils.getCellData(1, 2);
 
 		Home_Page.lnk_Login(driver).click();
-
+		
 		Login_Page.txtbx_UserName(driver).sendKeys(sUserName);
 
 		Login_Page.txtbx_Password(driver).sendKeys(sPassword);
@@ -29,6 +34,8 @@ public class SignIn_Action {
 		Thread.sleep(3000);
 
 		Login_Page.btn_LogIn(driver).submit();
+		
+		Thread.sleep(5000);
 
     }
 

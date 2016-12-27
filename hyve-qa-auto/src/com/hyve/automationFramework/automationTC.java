@@ -38,6 +38,8 @@ public class automationTC {
         
     System.out.println("Login Successfully, now it is the time to Log Off buddy.");
     
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    
     //driver.findElement(By.className("logout-header")).click();
 
     Home_Page.lnk_LogOut(driver).click();

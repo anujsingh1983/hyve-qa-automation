@@ -57,7 +57,7 @@ public class HomeTest {
 
 	}
 
-/*	@Test(priority = 2)
+    @Test(priority = 2)
 	public void testLogin() {
 
 		// driver.get(hyvelogin);
@@ -77,7 +77,7 @@ public class HomeTest {
 
 	}
 	
-	@Test(priority = 3)
+	/*@Test(priority = 3)
 	public void testCart() throws InterruptedException, ParseException{
 		driver.findElement(By.xpath("//div[2]/div[1]/div/div/div[1]/div/div[2]/div/div/ul/li[1]/a")).click();
 		driver.findElement(By.xpath("//div[2]/div[1]/div/div/div[2]/div[1]/ul/li[11]/a")).click();
