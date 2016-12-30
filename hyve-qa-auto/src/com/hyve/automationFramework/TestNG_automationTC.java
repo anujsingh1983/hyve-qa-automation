@@ -3,9 +3,9 @@ package com.hyve.automationFramework;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -78,31 +78,39 @@ public class TestNG_automationTC {
 		driver.findElement(By.xpath("//a[@href='/pryme']")).click();
 		productHyve.Buy_pryme(driver).click();
 		logger.log(LogStatus.INFO, " Add Pryme into Cart Successfully");
-		
-		//driver.findElement(By.xpath("//div[2]/div[1]/div/div/div[2]/div[1]/ul/li[11]/a")).click();
-		
-		String subtotal=driver.findElement(By.xpath("//*[@id='CartForm']/table/tbody/tr/td[4]/div")).getText();
-		System.out.println("subtotal = "+ subtotal);
-		
-		String saleprice=driver.findElement(By.xpath("//*[@id='CartForm']/table/tbody/tr/td[3]/div")).getText();
-		System.out.println("Sale Price = "+ saleprice);
-		
-		String quantity=driver.findElement(By.xpath("//*[contains(@name,'qty')]")).getAttribute("value");
-		System.out.println("Quantity = "+ quantity);
-		
-	
-	double isubtotal= Double.parseDouble(subtotal.replaceAll("[^0-9\\.]+", ""));
-	//System.out.println("isubtotal is "+isubtotal);
-	double isaleprice= Double.parseDouble(saleprice.replaceAll("[^0-9\\.]+", ""));
-	//System.out.println("isaleprice is "+isaleprice);
-		int iquantity=Integer.parseInt(quantity);
-		double expectedsubtotal=(isaleprice*iquantity);
-		System.out.println("Expected Subtotal is "+expectedsubtotal);
+
+		// driver.findElement(By.xpath("//div[2]/div[1]/div/div/div[2]/div[1]/ul/li[11]/a")).click();
+
+		String subtotal = driver.findElement(By.xpath("//*[@id='CartForm']/table/tbody/tr/td[4]/div")).getText();
+		System.out.println("subtotal = " + subtotal);
+
+		String saleprice = driver.findElement(By.xpath("//*[@id='CartForm']/table/tbody/tr/td[3]/div")).getText();
+		System.out.println("Sale Price = " + saleprice);
+
+		String quantity = driver.findElement(By.xpath("//*[contains(@name,'qty')]")).getAttribute("value");
+		System.out.println("Quantity = " + quantity);
+
+		double isubtotal = Double.parseDouble(subtotal.replaceAll("[^0-9\\.]+", ""));
+		// System.out.println("isubtotal is "+isubtotal);
+		double isaleprice = Double.parseDouble(saleprice.replaceAll("[^0-9\\.]+", ""));
+		// System.out.println("isaleprice is "+isaleprice);
+		int iquantity = Integer.parseInt(quantity);
+		double expectedsubtotal = (isaleprice * iquantity);
+		System.out.println("Expected Subtotal is " + expectedsubtotal);
 		Assert.assertEquals(isubtotal, expectedsubtotal);
 		System.out.println("Great.. Subtotal is correct");
 		logger.log(LogStatus.PASS, " Added Product quantity and price verified Successfully");
-				
-		Thread.sleep(3000);
+		WebElement img_pryme = driver.findElement(By.xpath("//img[contains(@title,'Pryme')]"));
+		Boolean img_present = (Boolean) ((JavascriptExecutor) driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",img_pryme);
+		if (!img_present) {
+			System.out.println("Added Product Image not displayed.");
+		} else {
+			System.out.println("Added Product Image displayed.");
+		}
+		logger.log(LogStatus.PASS, " Added Product Image verified Successfully");
+	
+	Thread.sleep(3000);
+
 	}
 
 	@Test(priority = 3)
